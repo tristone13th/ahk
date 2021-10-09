@@ -32,6 +32,18 @@ CapsLock & l::
     Else
         Send {Right}
 return
+CapsLock & n::
+    If (WinActive("ahk_exe msedge.exe"))
+        Send ^t
+    Else
+        Send ^n
+return
+CapsLock & i::
+    If (WinActive("ahk_exe msedge.exe"))
+        Send ^w
+    Else
+        Send ^i
+return
 CapsLock & j::Send {Down}
 CapsLock & k::Send {Up}
 
