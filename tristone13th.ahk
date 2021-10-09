@@ -1,3 +1,7 @@
+; mouse
+XButton1::^c
+XButton2::^v
+
 ; ~
 LShift & Esc::
     Send ~
@@ -13,13 +17,23 @@ Down::Send {Volume_Down}
 RShift::Send {Volume_Mute}
 
 ; specific key mapping for ctrl
-CapsLock & n::Send {Down}
-CapsLock & p::Send {Up}
+; CapsLock & n::Send {Down}
+; CapsLock & p::Send {Up}
 CapsLock & BackSpace::Send {Delete}
-CapsLock & h::Send {Ctrl Down}{Shift Down}{Tab Down}{Ctrl Up}{Shift Up}{Tab Up}
-CapsLock & l::Send {Ctrl Down}{Tab Down}{Ctrl Up}{Tab Up}
-CapsLock & j::Send {PgDn}
-CapsLock & k::Send {PgUp}
+CapsLock & h::
+    If (WinActive("ahk_exe msedge.exe"))
+        Send {Ctrl Down}{Shift Down}{Tab Down}{Ctrl Up}{Shift Up}{Tab Up}
+    Else
+        Send {Left}
+return
+CapsLock & l::
+    If (WinActive("ahk_exe msedge.exe"))
+        Send {Ctrl Down}{Tab Down}{Ctrl Up}{Tab Up}
+    Else
+        Send {Right}
+return
+CapsLock & j::Send {Down}
+CapsLock & k::Send {Up}
 
 ; specifig key mapping for win
 LCtrl & c::Send ^c
