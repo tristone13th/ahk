@@ -12,8 +12,8 @@ LShift & `;::
 Return
 
 ; volume up, down and mute
-Up::Send {Volume_Up}
-Down::Send {Volume_Down}
+RShift & Up::Send {Volume_Up}
+RShift & Down::Send {Volume_Down}
 RShift::Send {Volume_Mute}
 
 ; specific key mapping for ctrl
