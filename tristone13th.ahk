@@ -20,23 +20,23 @@ RShift::Send {Volume_Mute}
 ; CapsLock & n::Send {Down}
 ; CapsLock & p::Send {Up}
 CapsLock & BackSpace::Send {Delete}
-CapsLock & h::
-    If (WinActive("ahk_exe msedge.exe"))
+CapsLock & p::
+    If (WinActive("ahk_exe msedge.exe") or WinActive("ahk_exe Code.exe"))
         Send {Ctrl Down}{Shift Down}{Tab Down}{Ctrl Up}{Shift Up}{Tab Up}
     Else
-        Send {Left}
-return
-CapsLock & l::
-    If (WinActive("ahk_exe msedge.exe"))
-        Send {Ctrl Down}{Tab Down}{Ctrl Up}{Tab Up}
-    Else
-        Send {Right}
+        Send ^p
 return
 CapsLock & n::
+    If (WinActive("ahk_exe msedge.exe") or WinActive("ahk_exe Code.exe"))
+        Send {Ctrl Down}{Tab Down}{Ctrl Up}{Tab Up}
+    Else
+        Send ^n
+return
+CapsLock & o::
     If (WinActive("ahk_exe msedge.exe"))
         Send ^t
     Else
-        Send ^n
+        Send ^o
 return
 CapsLock & i::
     If (WinActive("ahk_exe msedge.exe"))
@@ -46,6 +46,8 @@ CapsLock & i::
 return
 CapsLock & j::Send {Down}
 CapsLock & k::Send {Up}
+CapsLock & h::Send {Left}
+CapsLock & l::Send {Right}
 
 ; specifig key mapping for win
 LCtrl & c::Send ^c
@@ -63,6 +65,8 @@ LAlt & d::Send {$}
 LWin & d::Send {$}
 LAlt & i::Send {!}
 LWin & i::Send {!}
+LAlt & s::Send {*}
+LWin & s::Send {*}
 LAlt & j::Send {(}
 LWin & j::Send {(}
 LAlt & k::Send {)}
