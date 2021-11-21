@@ -1,9 +1,11 @@
 ; note: must be saved and opened as GBK encoding!
 
 ; auto execution section
+; to see what is an execution section, please refer to https://www.autohotkey.com/docs/Scripts.htm#auto
 
 ; set task list
 ; refer to this https://www.autohotkey.com/board/topic/48488-solved-initializing-a-global-variable/
+
 tasklist := []
 strings := JEE_ExpGetTaskbarItems()
 loop parse, strings, `n, `r
@@ -22,6 +24,35 @@ taskmap := {}
 for index, value in tasklist
 {
     taskmap[value] := index
+}
+
+
+; suspend when playing full screen games or watching full screen videos
+lastWinState := 0
+SetTimer, FullscreenCheck, 500
+Exit
+	
+FullscreenCheck()
+{
+    global lastWinState
+    WinGetActiveTitle, OutputVar
+    ; ToolTip % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
+    ; MsgBox % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
+    winState := WhatStyle(OutputVar)
+
+    If (winState != lastWinState){
+        lastWinState := winState
+        Suspend
+    }
+    ; ToolTip % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
+}
+
+WhatStyle(Title) ; https://autohotkey.com/board/topic/38882-detect-fullscreen-application/
+{
+    UniqueID := WinExist(Title)
+    WinGet style, Style, ahk_id %UniqueID%
+    WinGetPos ,,,winW,winH, %Title%
+    Return ((style & 0x20800000) or winH < A_ScreenHeight or winW < A_ScreenWidth) ? false : true
 }
 
 ; mouse
@@ -141,12 +172,12 @@ RWin & c::
 return
 RAlt & w::
     global taskmap
-    code := taskmap["Î¢ÐÅ"]
+    code := taskmap["å¾®ä¿¡"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RWin & w::
     global taskmap
-    code := taskmap["Î¢ÐÅ"]
+    code := taskmap["å¾®ä¿¡"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RAlt & e::
@@ -161,22 +192,22 @@ RWin & e::
 return
 RAlt & f::
     global taskmap
-    code := taskmap["ÎÄ¼þ×ÊÔ´¹ÜÀíÆ÷"]
+    code := taskmap["æ–‡ä»¶èµ„æºç®¡ç†å™¨"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RWin & f::
     global taskmap
-    code := taskmap["ÎÄ¼þ×ÊÔ´¹ÜÀíÆ÷"]
+    code := taskmap["æ–‡ä»¶èµ„æºç®¡ç†å™¨"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RAlt & m::
     global taskmap
-    code := taskmap["ÍøÒ×ÓÊÏä´óÊ¦"]
+    code := taskmap["ç½‘æ˜“é‚®ç®±å¤§å¸ˆ"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RWin & m::
     global taskmap
-    code := taskmap["ÍøÒ×ÓÊÏä´óÊ¦"]
+    code := taskmap["ç½‘æ˜“é‚®ç®±å¤§å¸ˆ"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
 RAlt & n::
@@ -337,6 +368,8 @@ HasVal(haystack, needle) {
 			return index
 	return 0
 }
+
+
 
 ; implementation of ACC
 class ACC_OBJID{
