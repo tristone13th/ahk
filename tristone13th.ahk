@@ -28,21 +28,22 @@ for index, value in tasklist
 
 
 ; suspend when playing full screen games or watching full screen videos
-lastWinState := 0
-SetTimer, FullscreenCheck, 500
+SetTimer, FullscreenCheck, 50
 Exit
 	
 FullscreenCheck()
 {
-    global lastWinState
     WinGetActiveTitle, OutputVar
     ; ToolTip % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
     ; MsgBox % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
     winState := WhatStyle(OutputVar)
 
-    If (winState != lastWinState){
-        lastWinState := winState
+    If (winState and !A_IsSuspended){
         Suspend
+    } Else {
+        If (!winState and A_IsSuspended){
+            Suspend
+        }
     }
     ; ToolTip % "Fullscreen Mode: "(WhatStyle(OutputVar) = 0 ? "false" : "true")
 }
@@ -69,9 +70,21 @@ LShift & `;::
 Return
 
 ; volume up, down and mute
-RShift & Up::Send {Volume_Up}
-RShift & Down::Send {Volume_Down}
-RShift::Send {Volume_Mute}
+RShift & Up::
+    Suspend, Permit ; allow fullscreen not be suspended
+    Send {Volume_Up}
+Return
+
+RShift & Down::
+    Suspend, Permit
+    Send {Volume_Down}
+Return
+
+RShift::
+    Suspend, Permit
+    Send {Volume_Mute}
+Return
+
 
 ; specific key mapping for ctrl
 ; CapsLock & n::Send {Down}
