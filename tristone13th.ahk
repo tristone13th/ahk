@@ -109,7 +109,7 @@ CapsLock & o::
         Send ^o
 return
 CapsLock & i::
-    If (WinActive("ahk_exe msedge.exe") or WinActive("ahk_exe Code.exe"))
+    If (WinActive("ahk_exe msedge.exe"))
         Send ^w
     Else
         Send ^i
@@ -149,22 +149,69 @@ LAlt & o::Send {@}
 LWin & o::Send {@}
 LAlt & u::Send {^}
 LWin & u::Send {^}
-LAlt & b::Send {``}
-LWin & b::Send {``}
-
-numMode := 0
+LAlt & h::Send {``}
+LWin & h::Send {``}
 LAlt & `;::
-    if (numMode = 1)
-        numMode := 0
-    Else
-        numMode := 1
+    Send :
 Return
 LWin & `;::
-    if (numMode = 1)
-        numMode := 0
-    Else
-        numMode := 1
+    Send :
 Return
+LAlt & '::
+    Send `"
+Return
+LWin & '::
+    Send `"
+Return
+LAlt & [::
+    Send {{}
+Return
+LWin & [::
+    Send {{}
+Return
+LAlt & ]::
+    Send {}}
+Return
+LWin & ]::
+    Send {}}
+Return
+LAlt & ,::
+    Send {<}
+Return
+LWin & ,::
+    Send {<}
+Return
+LAlt & .::
+    Send {>}
+Return
+LWin & .::
+    Send {>}
+Return
+LAlt & /::
+    Send {?}
+Return
+LWin & /::
+    Send {?}
+Return
+LAlt & =::
+    Send {+}
+Return
+LWin & =::
+    Send {+}
+Return
+LAlt & -::
+    Send {_}
+Return
+LWin & -::
+    Send {_}
+Return
+LAlt & \::
+    Send {|}
+Return
+LWin & \::
+    Send {|}
+Return
+
 ; specific key mapping for right alt
 RAlt & a::Send {Blind}{LWin Down}{Down}{LWin Up}
 RWin & a::Send {Blind}{LWin Down}{Down}{LWin Up}
@@ -277,7 +324,6 @@ RAlt & q::Send {Blind}{LAlt Down}{F4}{LAlt Up}
 RWin & q::Send {Blind}{LAlt Down}{F4}{LAlt Up}
 
 process(key){
-    global numMode
     ; GetKeyState, sDown, Space, P
     GetKeyState, cDown, CapsLock, T
     GetKeyState, pcDown, CapsLock, P
@@ -316,32 +362,7 @@ process(key){
     ; }
     ; key as itself
     Else
-        If (numMode = 1){
-            If (key = "a")
-                Send 1
-            Else If (key = "s")
-                Send 2
-            Else If (key = "d")
-                Send 3
-            Else If (key = "f")
-                Send 4
-            Else If (key = "g")
-                Send 5
-            Else If (key = "h")
-                Send 6
-            Else If (key = "j")
-                Send 7
-            Else If (key = "k")
-                Send 8
-            Else If (key = "l")
-                Send 9
-            Else If (key = ";")
-                Send 0
-            Else
-                Send %key%
-        }
-        Else
-            Send %key%
+        Send %key%
 }
 
 *a::process("a")
@@ -371,6 +392,7 @@ process(key){
 *y::process("y")
 *z::process("z")
 *`;::process(";")
+*SPACE::process("{Space}")
 
 ; util functions
 HasVal(haystack, needle) {
