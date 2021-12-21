@@ -149,8 +149,8 @@ LAlt & o::Send {@}
 LWin & o::Send {@}
 LAlt & u::Send {^}
 LWin & u::Send {^}
-LAlt & h::Send {``}
-LWin & h::Send {``}
+LAlt & h::Send {Blind}{Text}``````
+LWin & h::Send {Blind}{Text}``````
 LAlt & `;::
     Send :
 Return
