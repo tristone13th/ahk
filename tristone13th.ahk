@@ -147,10 +147,8 @@ LAlt & n::Send {#}
 LWin & n::Send {#}
 LAlt & o::Send {@}
 LWin & o::Send {@}
-LAlt & u::Send {^}
-LWin & u::Send {^}
-LAlt & h::Send {Blind}{Text}``````
-LWin & h::Send {Blind}{Text}``````
+LAlt & h::Send {Blind}{Text}``
+LWin & h::Send {Blind}{Text}``
 LAlt & `;::
     Send :
 Return
@@ -211,6 +209,30 @@ Return
 LWin & \::
     Send {|}
 Return
+LAlt & p::
+    Send {+}
+Return
+LWin & p::
+    Send {+}
+Return
+LAlt & u::
+    Send {_}
+Return
+LWin & u::
+    Send {_}
+Return
+LAlt & y::
+    Send {^}
+Return
+LWin & y::
+    Send {^}
+Return
+LAlt & q::
+    Send {~}
+Return
+LWin & q::
+    Send {~}
+Return
 
 ; specific key mapping for right alt
 RAlt & a::Send {Blind}{LWin Down}{Down}{LWin Up}
@@ -260,36 +282,36 @@ RWin & f::
     code := taskmap["文件资源管理器"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
-RAlt & m::
-    global taskmap
-    code := taskmap["网易邮箱大师"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RWin & m::
-    global taskmap
-    code := taskmap["网易邮箱大师"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RAlt & n::
-    global taskmap
-    code := taskmap["Typora"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RWin & n::
-    global taskmap
-    code := taskmap["Typora"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RAlt & r::
-    global taskmap
-    code := taskmap["Calendar"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RWin & r::
-    global taskmap
-    code := taskmap["Calendar"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
+; RAlt & m::
+;     global taskmap
+;     code := taskmap["网易邮箱大师"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RWin & m::
+;     global taskmap
+;     code := taskmap["网易邮箱大师"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RAlt & n::
+;     global taskmap
+;     code := taskmap["Typora"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RWin & n::
+;     global taskmap
+;     code := taskmap["Typora"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RAlt & r::
+;     global taskmap
+;     code := taskmap["Calendar"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RWin & r::
+;     global taskmap
+;     code := taskmap["Calendar"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
 RAlt & t::
     global taskmap
     code := taskmap["Windows_Terminal"]
@@ -300,16 +322,16 @@ RWin & t::
     code := taskmap["Windows_Terminal"]
     Send {Blind}{LWin Down}%code%{LWin Up}
 return
-RAlt & v::
-    global taskmap
-    code := taskmap["Microsoft_To_Do"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
-RWin & v::
-    global taskmap
-    code := taskmap["Microsoft_To_Do"]
-    Send {Blind}{LWin Down}%code%{LWin Up}
-return
+; RAlt & v::
+;     global taskmap
+;     code := taskmap["Microsoft_To_Do"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
+; RWin & v::
+;     global taskmap
+;     code := taskmap["Microsoft_To_Do"]
+;     Send {Blind}{LWin Down}%code%{LWin Up}
+; return
 RAlt & x::
     global taskmap
     code := taskmap["PDF_Reader_by_Xodo"]
@@ -392,7 +414,7 @@ process(key){
 *y::process("y")
 *z::process("z")
 *`;::process(";")
-*SPACE::process("{Space}")
+; *SPACE::process("{Space}")
 
 ; util functions
 HasVal(haystack, needle) {
